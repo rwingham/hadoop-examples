@@ -1,0 +1,46 @@
+Workflow pipeline for final project:
+
+To get REDDIT data:
+
+on bigbird61:
+spark-submit --master yarn --num-executors 75 lol_reddit.py (depends on collapse2canonical.py)
+output to champ_counts.txt and item_counts.txt
+
+lol_reddit_frac.py is identical to lol_reddit.py but has a separate line for specifying one subreddit with the original line commented out.  Make sure to also edit the names of the output files so they don't overwrite each other.
+
+To get RIOT data:
+
+--fetching--
+for appropriate region: python match_collection.py regioncode
+Output goes to lol[regioncode].sqlite
+Note: starting up multiple at once tends to pop over the rate limit a few times; not enough to get blacklisted, but it's best to stagger beginning the process
+
+--processing--
+
+sqlite3 lol[regioncode].sqlite
+
+to print to csv:
+.header on
+.mode csv
+.once ./[name of outfile].csv
+
+to get items:
+SELECT item0, item1, item2, item3, item4, item5, item6 FROM MatchParticipantStats;
+
+to get champs:
+SELECT championId from MatchParticipant;
+
+to count:
+on bigbird61:
+
+hadoop fs -put [the csv files]
+spark-submit --master yarn --num-executors 50 lol_riot.py champfile itemfile
+output goes to [champfile].txt and [itemfile].txt
+
+to make legible: 
+python legible_champs.py champfile (depends on champion.json)
+python legible_items.py itemfile (depends on item.json)
+
+--analysis--
+wrangling via spreadsheet; riotdatacompiled.numbers for graphs and spreadsheet, riotdatacompiled (csv folder) for csvs to import into R
+rankcorrs.R for rank correlation tests -- meant to be run line by line in Rstudio, doesn't have useful print statements to be executed all at once.
