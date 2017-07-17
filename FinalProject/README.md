@@ -29,7 +29,7 @@ Riot data were collected via the Riot Games Developer API (Riot Games, 2015), us
 
 |Region|NA|KR|EUW|EUNE|
 |---|---|---|---|---|
-|Matches|	9716|	5135|	|10337|	3262|
+|Matches|9716|5135|10337|3262|
 
 Table 1: Matches per region.
 
@@ -75,9 +75,9 @@ Table 4: Kendall Tau between each region’s Riot data and the Reddit data.
 Correlations were also computed between each of the contributing subreddits and the total Reddit data, as well as between each subreddit and the aggregate champion and item data.  As would be expected given the much greater size of /r/leagueoflegends, it had a much higher correlation with the total, indicating it likely contributed most of the content.  For champions, the highest tau between a subreddit and items was for the larger /r/leagueoflegends subreddit, while for items it was for /r/summonerschool.  All correlations had significant p-values.  
 
 |Champions	|Items|
-|leagueoflegends|	0.4365	|0.2085
-|leagueoflegendsmeta|0.3706	|0.2496
-|summonerschool|	0.4067	|0.2943
+|leagueoflegends|	0.4365	|0.2085|
+|leagueoflegendsmeta|0.3706	|0.2496|
+|summonerschool|	0.4067	|0.2943|
 
 Table 5: Kendall Tau between each subreddit’s data and the total Riot data.	
 
